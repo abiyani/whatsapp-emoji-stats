@@ -96,19 +96,21 @@ user_to_msg = coll.defaultdict(unicode)  # ID => all_msgs_concatenated (all mess
 total_msg_count = 0
 for r in rows:
     if isinstance(r, tuple) and r[0] is not None:
-        assert r[2] == grp_or_contact_id  # Sanity check (since we queried for a fixed 'key_remote_jid' value, this field should be same for all rows)
+        assert r[2] == grp_or_contact_id, "Problem row = {}".format(r)  # Sanity check (since we queried for a fixed 'key_remote_jid' value, this field should be same for all rows)
         total_msg_count += 1
         if r[3] == 1:
             user = "me"
-            if r[4] != 6:  # 6 signifies the case when I changed the group name
-                assert r[1] is None  # Sanity check
+            if r[4] not in (5, 6):  # 6 is for group name change, 5 is broadcast
+                assert r[1] is None, "Problem row = {}".format(r)  # Sanity check, if message was sent by me, then remote_resource field should be empty
+        elif r[1] == u'':
+            assert "@s." in grp_or_contact_id, "Problem row = {}".format(r)  # Must be a one-to-one chat in this case
+            user = r[2]
+        elif "@g." not in grp_or_contact_id:
+            assert r[1].endswith("@broadcast"), "Problem row = {}".format(r)  # Still not a group chat => It should be a broadcast message
+            user = r[2]
         else:
-            if r[1] == u'':
-                assert "@s." in grp_or_contact_id  # Must be a one-to-one chat
-                user = r[2]
-            else:
-                assert "@g." in grp_or_contact_id  # Must be a group
-                user = r[1]
+            assert "@g." in grp_or_contact_id, "Problem row = {}".format(r)  # Must be a group
+            user = r[1]
         user_to_msg[user] += r[0]
 #####################################################
 
