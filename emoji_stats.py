@@ -61,9 +61,9 @@ else:
         sys.exit(1)
 
     if len(matching_names) > 1:
-        sys.stderr.write("Too many matches found for the regular expression '{}', please narrow it down (or specify id using '--group-or-contact-id').\n" +
+        sys.stderr.write("\nERROR: Too many matches found for the regular expression '{}', please narrow it down (or specify id using '--group-or-contact-id'). " +
                          "Below are all the matches for this regexp:\n\n".format(tre))
-        sys.stderr.write("\n".join([removeNonAscii(all_contacts[i]) + " (id = '{}')".format(i) for i in matching_names]) + "\n")
+        sys.stderr.write("\n".join([removeNonAscii(all_contacts[i]) + " (id = '{}')".format(i) for i in sorted(matching_names, key=lambda x:all_contacts[x])]) + "\n")
         sys.exit(1)
 
     grp_or_contact_id = matching_names[0]
@@ -133,7 +133,8 @@ print ("""
             $(document).ready( function () {{
                 $('#emoji_table').dataTable({{
                     "aLengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
-                    "iDisplayLength" : -1
+                    "iDisplayLength" : -1,
+                    "bFilter": false
                 }});
             }});
         </script>
