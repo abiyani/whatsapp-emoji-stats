@@ -19,10 +19,11 @@ parser.add_argument('-m', '--msg-db', metavar="path", default="msgstore.db", hel
 parser.add_argument('-c', '--contacts-db', metavar="path", default="wa.db", help='Path to Contacts DB (wa.db)')
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('-r', '--group-or-contact-regexp', metavar="regexp",
-    help='Regular expression matching a  the target contact or group name (case insensitive)')
+                   help='Regular expression matching a  the target contact or group name (case insensitive)')
 group.add_argument('-i', '--group-or-contact-id', metavar="id_str",
-    help='Exact group id matching the target contact or group (case sensitive).' +
-         'This is useful when you have two different whatsapp contacts with exact same name (so cannot distinguish using the regexp option (--group-or-contact-regexp)')
+                   help='Exact group id matching the target contact or group (case sensitive).' +
+                   'This is useful when you have two different whatsapp contacts with exact same name ' +
+                   '(so cannot distinguish using the regexp option (--group-or-contact-regexp)')
 
 args = parser.parse_args()
 if not os.path.isfile(args.contacts_db) or not os.path.isfile(args.msg_db):
@@ -144,7 +145,7 @@ print ("""
     <body>
         <h1>Stats for '{}'</h1>
         <pre>
-""".format(*(removeNonAscii(all_contacts.setdefault(grp_or_contact_id, grp_or_contact_id.split("@")[0])),)*2))
+""".format(*(removeNonAscii(all_contacts.setdefault(grp_or_contact_id, grp_or_contact_id.split("@")[0])),) * 2))
 
 ########################################
 
