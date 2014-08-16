@@ -1,7 +1,17 @@
 whatsapp-emoji-stats
 ====================
 
-Get statistics on how you and your friends use whatsapp emojis (**Android ONLY**). The output is written as an html table (styled as a [datatable](http://www.datatables.net/) so you can sort based on different columns).
+Get statistics on how you and your friends use whatsapp emojis (**Android ONLY**). The output is written as an html table (styled as a [datatable](http://www.datatables.net/) so you can sort based on different columns). The script currently understands 1054 emojis (which includes 208 country flags, not all of which are in whatsapp (yet)). 
+
+### Sample output (random data):
+
+#### For a Group:
+![Demo](screenshots/example_group.png)
+
+#### For an individual contact:
+![Demo](screenshots/example_friend.png)
+
+---
 
 ### Usage:
 
@@ -33,4 +43,4 @@ I use the following procedure on Ubuntu, but you (probably) should be able to us
 
 ---
 
-Feel free to email @abiyani if you have any questions regarding the usage, and open issues if you notice any bug. Pull requests are always welcome. :)
+Feel free to email [@abiyani](https://github.com/abiyani) if you have any questions regarding the usage, and open issues if you notice any bug. Pull requests are always welcome. :)
