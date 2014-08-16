@@ -41,4 +41,4 @@ I use the following procedure on Ubuntu, but you (probably) should be able to us
 
 ---
 
-Feel free to email @abiyani if you have any questions regarding the usage, and open issues if you notice any bug. Pull requests are always welcome. :)
+Feel free to email [@abiyani](https://github.com/abiyani) if you have any questions regarding the usage, and open issues if you notice any bug. Pull requests are always welcome. :)
